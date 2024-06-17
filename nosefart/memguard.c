@@ -270,8 +270,7 @@ void _my_free(void **data)
 {
    char fail[256];
 
-   if (NULL == data || NULL == *data
-       || 0xFFFFFFFF == (uint32) *data || 0xFFFFFFFF == (uint32) data)
+   if (NULL == data || NULL == *data)
    {
 #ifdef NOFRENDO_DEBUG
       sprintf(fail, "free: attempted to free NULL pointer at line %d of %s\n",
