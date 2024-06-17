@@ -20,7 +20,7 @@ clean:
 	rm -f nsfplay.o
 
 nsfplay: nsfplay.cpp ${OBJECT_FILES}
-	g++ -std=c++11 -o nsfplay nsfplay.cpp ${OBJECT_FILES} -lm
+	g++ -std=c++11 ${CFLAGS} -o nsfplay nsfplay.cpp ${OBJECT_FILES} -lm
 
 dis6502.o: nosefart/dis6502.c
 	gcc ${CFLAGS} -c $<
