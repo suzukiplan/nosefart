@@ -2,7 +2,7 @@
 
 ## About
 
-- このリポジトリはオープンソースの NSF プレイヤ [nosefat](https://nosefart.sourceforge.net/) の解析を目的としています。
+- このリポジトリはオープンソースの NSF プレイヤ [nosefart](https://nosefart.sourceforge.net/) の解析を目的としています。
 - オリジナルのソースコードは [nosefart](./nosefart/) ディレクトリ以下に格納されています。
 - [nsfplay.cpp](./nsfplay.cpp) は SDL2 を用いて nosefart で NSF ファイルを再生する実装です
 
