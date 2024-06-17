@@ -4,7 +4,11 @@
 
 - このリポジトリはオープンソースの NSF プレイヤ [nosefat](https://nosefart.sourceforge.net/) の解析を目的としています。
 - オリジナルのソースコードは [nosefart](./nosefart/) ディレクトリ以下に格納されています。
-- [nsfplay.cpp](./nsfplay.cpp) は SDL2 を用いて nosefart で NSF ファイルを再生する実装例になる予定です。
+- [nsfplay.cpp](./nsfplay.cpp) は SDL2 を用いて nosefart で NSF ファイルを再生する実装です
+
+## WIP Status
+
+とりあえず再生できたものの矩形波チャネル2が途中からおかしな感じになる
 
 ## How to Build
 
