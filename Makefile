@@ -13,6 +13,7 @@ OBJECT_FILES += vrcvisnd.o
 CFLAGS = -DNSF_PLAYER
 
 all: nsfplay
+	./nsfplay test.nsf
 
 clean:
 	rm -f ${OBJECT_FILES}
