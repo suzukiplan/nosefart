@@ -10,7 +10,12 @@ OBJECT_FILES += nsf.o
 OBJECT_FILES += vrc7_snd.o
 OBJECT_FILES += vrcvisnd.o
 
-CFLAGS = -DNSF_PLAYER
+CFLAGS = -O2
+CFLAGS += -DNSF_PLAYER
+CFLAGS += -D_THREAD_SAFE
+CFLAGS += -I/usr/include/SDL2
+CFLAGS += -I/usr/local/include/SDL2
+CFLAGS += -I/opt/X11/include
 
 all: nsfplay
 	./nsfplay test.nsf
