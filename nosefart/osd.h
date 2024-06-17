@@ -27,6 +27,14 @@
 #define _OSD_H_
 
 
+#if 1
+#define __PACKED__
+#if WIN32
+#define  PATH_SEP    '\\'
+#else
+#define  PATH_SEP    '/'
+#endif
+#else
 #ifdef __GNUC__
 #define  __PACKED__  __attribute__ ((packed))
 #define  PATH_SEP    '/'
@@ -40,6 +48,7 @@
 #else /* crapintosh? */
 #define  __PACKED__
 #define  PATH_SEP    ':'
+#endif
 #endif
 
 extern void osd_loginit(void);
