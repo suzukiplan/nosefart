@@ -10,6 +10,10 @@ static void audioCallback(void* userdata, Uint8* stream, int len)
 {
     nsf_t* nsf = (nsf_t*)userdata;
     nsf_frame(nsf);
+    printf("rect[1] = %02X %02X %02X %02X rect[1] = %02X %02X %02X %02X    \r",
+        nsf->apu->rectangle[0].regs[0], nsf->apu->rectangle[0].regs[1], nsf->apu->rectangle[0].regs[2], nsf->apu->rectangle[0].regs[3],
+        nsf->apu->rectangle[1].regs[0], nsf->apu->rectangle[1].regs[1], nsf->apu->rectangle[1].regs[2], nsf->apu->rectangle[1].regs[3]
+    );
     nsf->process(stream, len / 2);
 }
 
@@ -63,7 +67,7 @@ int main(int argc, char* argv[])
     }
     SDL_PauseAudioDevice(audioDeviceId, 0);
 
-    printf("Press enter to exit...");
+    printf("Press enter to exit...\n");
     fgetc(stdin);
 
     SDL_CloseAudioDevice(audioDeviceId);
