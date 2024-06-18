@@ -35,6 +35,9 @@ rect[1] = 3F 08 9F 00 rect[1] = 3F 08 DF 01
 
 恐らく、256以下の周波数を設定した時にクリアされるべき reg3 が何故かクリアされない挙動になることで音痴になっているかもしれない。
 
+FamiStudio のエクスポート機能の問題かもしれないので issue で確認中。
+
+https://github.com/BleuBleu/FamiStudio/issues/325
 
 ## How to Build
 
