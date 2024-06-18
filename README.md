@@ -8,7 +8,32 @@
 
 ## WIP Status
 
-とりあえず再生できたものの矩形波チャネル2が途中からおかしな感じになる
+とりあえず再生できたものの矩形波チャネル2が途中からおかしな感じになる。
+
+音程周波数の更新が不適切な状態になっている。
+
+矩形波チャンネルの音程周波数は reg2 (8bits) と reg3 の下位 3bits の 11bits で設定する仕様だが、
+
+```c
+/* RECTANGLE WAVE
+** ==============
+** reg0: 0-3=volume, 4=envelope, 5=hold, 6-7=duty cycle
+** reg1: 0-2=sweep shifts, 3=sweep inc/dec, 4-6=sweep length, 7=sweep on
+** reg2: 8 bits of freq
+** reg3: 0-2=high freq, 7-4=vbl length counter
+*/
+```
+
+矩形波レジスタのダンプを出力してみたところ、チャネル2 (rect[1]) の reg3 が演奏開始時点は 0x01 になっているが、高い音程になっても 0x01 のまま（低い音）になっていることが分かった。
+
+```
+./nsfplay test.nsf
+Press enter to exit...
+rect[1] = 3F 08 9F 00 rect[1] = 3F 08 DF 01  
+```
+
+恐らく、256以下の周波数を設定した時にクリアされるべき reg3 が何故かクリアされない挙動になることで音痴になっているかもしれない。
+
 
 ## How to Build
 
