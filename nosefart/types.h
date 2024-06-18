@@ -61,26 +61,9 @@ typedef  uint8_t  boolean;
 #define  NULL     ((void *) 0)
 #endif
 
-#ifdef NOFRENDO_DEBUG
-#include <stdlib.h>
-#include "memguard.h"
-#include "log.h"
-#define  ASSERT(expr)      if (FALSE == (expr))\
-                           {\
-                             log_printf("ASSERT: line %d of %s\n", __LINE__, __FILE__);\
-                             log_shutdown();\
-                             exit(1);\
-                           }
-#define  ASSERT_MSG(msg)   {\
-                             log_printf("ASSERT: %s\n", msg);\
-                             log_shutdown();\
-                             exit(1);\
-                           }
-#else /* Not debugging */
 #include <stdlib.h>
 #define  ASSERT(expr)
 #define  ASSERT_MSG(msg)
-#endif
 
 #endif /* _TYPES_H_ */
 
