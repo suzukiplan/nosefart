@@ -1,5 +1,4 @@
-OBJECT_FILES = dis6502.o
-OBJECT_FILES += fds_snd.o
+OBJECT_FILES = fds_snd.o
 OBJECT_FILES += fmopl.o
 OBJECT_FILES += mmc5_snd.o
 OBJECT_FILES += nes_apu.o
@@ -25,9 +24,6 @@ clean:
 
 nsfplay: nsfplay.cpp ${OBJECT_FILES}
 	g++ -std=c++11 ${CFLAGS} -o nsfplay nsfplay.cpp ${OBJECT_FILES} -lm -lSDL2
-
-dis6502.o: nosefart/dis6502.c
-	gcc ${CFLAGS} -c $<
 
 fds_snd.o: nosefart/fds_snd.c
 	gcc ${CFLAGS} -c $<

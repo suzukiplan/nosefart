@@ -26,7 +26,6 @@
 
 #include "types.h"
 #include "nes6502.h"
-#include "dis6502.h"
 #include <stdio.h>
 
 
