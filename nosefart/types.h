@@ -41,27 +41,14 @@
 #endif
 
 /* These should be changed depending on the platform */
-
-
-
-#ifdef __BEOS__		/* added by Eli Dayan (for compiling under BeOS) */
-	
-	/* use types in the BeOS Support Kit instead */
-	#include <be/support/SupportDefs.h>
-#elif defined (DCPLAYA) /* $$$ added by ben (for compiling with dcplaya) */
-# include <arch/types.h>
-#else	
-	typedef  char     int8;
-	typedef  short    int16;
-	typedef  int      int32;
-
-	typedef  unsigned char  uint8;
-	typedef  unsigned short uint16;
-	typedef  unsigned int   uint32;
-
-#endif
-
-typedef  uint8    boolean;
+#include <stdint.h>
+typedef  int8_t   int8;
+typedef  int16_t  int16;
+typedef  int32_t  int32;
+typedef  uint8_t  uint8;
+typedef  uint16_t uint16;
+typedef  uint32_t uint32;
+typedef  uint8_t  boolean;
 
 #ifndef  TRUE
 #define  TRUE     1
