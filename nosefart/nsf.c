@@ -98,18 +98,11 @@ static nes6502_memwrite default_writehandler[] =
 
 static uint8 invalid_read(uint32 address)
 {
-#ifdef NOFRENDO_DEBUG
-   log_printf("filthy NSF read from $%04X\n", address);
-#endif /* NOFRENDO_DEBUG */
-
    return 0xFF;
 }
 
 static void invalid_write(uint32 address, uint8 value)
 {
-#ifdef NOFRENDO_DEBUG
-   log_printf("filthy NSF tried to write $%02X to $%04X\n", value, address);
-#endif /* NOFRENDO_DEBUG */
 }
 
 /* set up the address handlers that the CPU uses */
