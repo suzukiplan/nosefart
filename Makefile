@@ -1,7 +1,6 @@
 OBJECT_FILES = dis6502.o
 OBJECT_FILES += fds_snd.o
 OBJECT_FILES += fmopl.o
-OBJECT_FILES += memguard.o
 OBJECT_FILES += mmc5_snd.o
 OBJECT_FILES += nes_apu.o
 OBJECT_FILES += nes6502.o
@@ -34,9 +33,6 @@ fds_snd.o: nosefart/fds_snd.c
 	gcc ${CFLAGS} -c $<
 
 fmopl.o: nosefart/fmopl.c
-	gcc ${CFLAGS} -c $<
-
-memguard.o: nosefart/memguard.c
 	gcc ${CFLAGS} -c $<
 
 mmc5_snd.o: nosefart/mmc5_snd.c

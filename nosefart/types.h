@@ -90,7 +90,7 @@ typedef  uint8    boolean;
                              exit(1);\
                            }
 #else /* Not debugging */
-#include "memguard.h"
+#include <stdlib.h>
 #define  ASSERT(expr)
 #define  ASSERT_MSG(msg)
 #endif
