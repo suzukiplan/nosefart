@@ -39,6 +39,12 @@ FamiStudio のエクスポート機能の問題かもしれないので issue �
 
 https://github.com/BleuBleu/FamiStudio/issues/325
 
+FamiStudio の作者さんからの情報によると、音程の変化にSweepを使う可能性があるらしい。
+
+音程周波数の問題に着眼していてSweepが適切に実装されているかは確認していなかったのでnosefartのsweepが適切に実装されているか解析してみることにする。
+
+あとはもうちょっと動作実績のある Linux の NSF 再生機能があるエミュレータについても確認してみる。
+
 ## How to Build
 
 Linux (Ubuntu) でのビルドを前提としています。
