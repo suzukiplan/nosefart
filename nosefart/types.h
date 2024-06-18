@@ -3,14 +3,14 @@
 **
 **
 ** This program is free software; you can redistribute it and/or
-** modify it under the terms of version 2 of the GNU Library General 
+** modify it under the terms of version 2 of the GNU Library General
 ** Public License as published by the Free Software Foundation.
 **
-** This program is distributed in the hope that it will be useful, 
+** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
-** Library General Public License for more details.  To obtain a 
-** copy of the GNU Library General Public License, write to the Free 
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+** Library General Public License for more details.  To obtain a
+** copy of the GNU Library General Public License, write to the Free
 ** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 **
 ** Any permitted reproduction of these routines, in whole or in part,
@@ -29,41 +29,41 @@
 /* Define this if running on little-endian (x86) systems */
 
 #ifndef DCPLAYA
-# define  HOST_LITTLE_ENDIAN
+#define HOST_LITTLE_ENDIAN
 #endif
 
 #ifdef __GNUC__
-#define  INLINE      static inline
+#define INLINE static inline
 #elif defined(WIN32)
-#define  INLINE      static __inline
+#define INLINE static __inline
 #else /* crapintosh? */
-#define  INLINE      static
+#define INLINE static
 #endif
 
 /* These should be changed depending on the platform */
 #include <stdint.h>
-typedef  int8_t   int8;
-typedef  int16_t  int16;
-typedef  int32_t  int32;
-typedef  uint8_t  uint8;
-typedef  uint16_t uint16;
-typedef  uint32_t uint32;
-typedef  uint8_t  boolean;
+typedef int8_t int8;
+typedef int16_t int16;
+typedef int32_t int32;
+typedef uint8_t uint8;
+typedef uint16_t uint16;
+typedef uint32_t uint32;
+typedef uint8_t boolean;
 
-#ifndef  TRUE
-#define  TRUE     1
+#ifndef TRUE
+#define TRUE 1
 #endif
-#ifndef  FALSE
-#define  FALSE    0
+#ifndef FALSE
+#define FALSE 0
 #endif
 
-#ifndef  NULL
-#define  NULL     ((void *) 0)
+#ifndef NULL
+#define NULL ((void*)0)
 #endif
 
 #include <stdlib.h>
-#define  ASSERT(expr)
-#define  ASSERT_MSG(msg)
+#define ASSERT(expr)
+#define ASSERT_MSG(msg)
 
 #endif /* _TYPES_H_ */
 

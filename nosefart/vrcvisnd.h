@@ -3,14 +3,14 @@
 **
 **
 ** This program is free software; you can redistribute it and/or
-** modify it under the terms of version 2 of the GNU Library General 
+** modify it under the terms of version 2 of the GNU Library General
 ** Public License as published by the Free Software Foundation.
 **
-** This program is distributed in the hope that it will be useful, 
+** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
-** Library General Public License for more details.  To obtain a 
-** copy of the GNU Library General Public License, write to the Free 
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+** Library General Public License for more details.  To obtain a
+** copy of the GNU Library General Public License, write to the Free
 ** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 **
 ** Any permitted reproduction of these routines, in whole or in part,
@@ -26,34 +26,31 @@
 #ifndef _VRCVISND_H_
 #define _VRCVISND_H_
 
-typedef struct vrcvirectangle_s
-{
-   uint8 reg[3];
-   int32 phaseacc;
-   uint8 adder;
+typedef struct vrcvirectangle_s {
+    uint8 reg[3];
+    int32 phaseacc;
+    uint8 adder;
 
-   int32 freq;
-   int32 volume;
-   uint8 duty_flip;
-   boolean enabled;
+    int32 freq;
+    int32 volume;
+    uint8 duty_flip;
+    boolean enabled;
 } vrcvirectangle_t;
 
-typedef struct vrcvisawtooth_s
-{
-   uint8 reg[3];
-   int32 phaseacc;
-   uint8 adder;
-   uint8 output_acc;
+typedef struct vrcvisawtooth_s {
+    uint8 reg[3];
+    int32 phaseacc;
+    uint8 adder;
+    uint8 output_acc;
 
-   int32 freq;
-   uint8 volume;
-   boolean enabled;
+    int32 freq;
+    uint8 volume;
+    boolean enabled;
 } vrcvisawtooth_t;
 
-typedef struct vrcvisnd_s
-{
-   vrcvirectangle_t rectangle[2];
-   vrcvisawtooth_t saw;
+typedef struct vrcvisnd_s {
+    vrcvirectangle_t rectangle[2];
+    vrcvisawtooth_t saw;
 } vrcvisnd_t;
 
 #include "nes_apu.h"

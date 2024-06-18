@@ -2,5 +2,6 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "common.h": "c"
-    }
+    },
+    "editor.formatOnSave": true
 }

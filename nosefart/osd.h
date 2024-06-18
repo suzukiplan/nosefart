@@ -3,14 +3,14 @@
 **
 **
 ** This program is free software; you can redistribute it and/or
-** modify it under the terms of version 2 of the GNU Library General 
+** modify it under the terms of version 2 of the GNU Library General
 ** Public License as published by the Free Software Foundation.
 **
-** This program is distributed in the hope that it will be useful, 
+** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
-** Library General Public License for more details.  To obtain a 
-** copy of the GNU Library General Public License, write to the Free 
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+** Library General Public License for more details.  To obtain a
+** copy of the GNU Library General Public License, write to the Free
 ** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 **
 ** Any permitted reproduction of these routines, in whole or in part,
@@ -26,36 +26,35 @@
 #ifndef _OSD_H_
 #define _OSD_H_
 
-
 #if 1
 #define __PACKED__
 #if WIN32
-#define  PATH_SEP    '\\'
+#define PATH_SEP '\\'
 #else
-#define  PATH_SEP    '/'
+#define PATH_SEP '/'
 #endif
 #else
 #ifdef __GNUC__
-#define  __PACKED__  __attribute__ ((packed))
-#define  PATH_SEP    '/'
+#define __PACKED__ __attribute__((packed))
+#define PATH_SEP '/'
 #ifdef __DJGPP__
-#include <dpmi.h>
 #include "dos_ints.h"
+#include <dpmi.h>
 #endif
 #elif defined(WIN32)
-#define  __PACKED__
-#define  PATH_SEP    '\\'
+#define __PACKED__
+#define PATH_SEP '\\'
 #else /* crapintosh? */
-#define  __PACKED__
-#define  PATH_SEP    ':'
+#define __PACKED__
+#define PATH_SEP ':'
 #endif
 #endif
 
 extern void osd_loginit(void);
 extern void osd_logshutdown(void);
-extern void osd_logprint(const char *string);
+extern void osd_logprint(const char* string);
 
-extern int osd_startsound(void (*playfunc)(void *buffer, int size));
+extern int osd_startsound(void (*playfunc)(void* buffer, int size));
 extern int osd_getsoundbps(void);
 extern int osd_getsamplerate(void);
 
@@ -76,4 +75,3 @@ extern int osd_getsamplerate(void);
 ** initial revision
 **
 */
-

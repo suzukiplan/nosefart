@@ -3,14 +3,14 @@
 **
 **
 ** This program is free software; you can redistribute it and/or
-** modify it under the terms of version 2 of the GNU Library General 
+** modify it under the terms of version 2 of the GNU Library General
 ** Public License as published by the Free Software Foundation.
 **
-** This program is distributed in the hope that it will be useful, 
+** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
-** Library General Public License for more details.  To obtain a 
-** copy of the GNU Library General Public License, write to the Free 
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+** Library General Public License for more details.  To obtain a
+** copy of the GNU Library General Public License, write to the Free
 ** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 **
 ** Any permitted reproduction of these routines, in whole or in part,
@@ -36,72 +36,72 @@
 /*#define  NES6502_DECIMAL*/
 
 /* number of bank pointers the CPU emulation core handles */
-#define  NES6502_4KBANKS
-#define  NES6502_NUMBANKS  16
-#define  NES6502_BANKSHIFT 12
-#define  NES6502_BANKMASK  ((0x10000 / NES6502_NUMBANKS) - 1)
+#define NES6502_4KBANKS
+#define NES6502_NUMBANKS 16
+#define NES6502_BANKSHIFT 12
+#define NES6502_BANKMASK ((0x10000 / NES6502_NUMBANKS) - 1)
 
 /* Add memory access control flags. This is a ram shadow memory that holds
  * for each memory bytes access flags for read, write and execute access.
- * The nes6502_mem_access holds all new access (all mode all location). It is 
+ * The nes6502_mem_access holds all new access (all mode all location). It is
  * used to determine if the player has loop in playing time calculation.
  */
 #ifdef NES6502_MEM_ACCESS_CTRL
 extern uint8 nes6502_mem_access;
-# define NES6502_READ_ACCESS 1
-# define NES6502_WRITE_ACCESS 2
-# define NES6502_EXE_ACCESS 4
+#define NES6502_READ_ACCESS 1
+#define NES6502_WRITE_ACCESS 2
+#define NES6502_EXE_ACCESS 4
 #endif /* #ifdef NES6502_MEM_ACCESS_CTRL */
 
 /* P (flag) register bitmasks */
-#define  N_FLAG         0x80
-#define  V_FLAG         0x40
-#define  R_FLAG         0x20  /* Reserved, always 1 */
-#define  B_FLAG         0x10
-#define  D_FLAG         0x08
-#define  I_FLAG         0x04
-#define  Z_FLAG         0x02
-#define  C_FLAG         0x01
+#define N_FLAG 0x80
+#define V_FLAG 0x40
+#define R_FLAG 0x20 /* Reserved, always 1 */
+#define B_FLAG 0x10
+#define D_FLAG 0x08
+#define I_FLAG 0x04
+#define Z_FLAG 0x02
+#define C_FLAG 0x01
 
 /* Vector addresses */
-#define  NMI_VECTOR     0xFFFA
-#define  RESET_VECTOR   0xFFFC
-#define  IRQ_VECTOR     0xFFFE
+#define NMI_VECTOR 0xFFFA
+#define RESET_VECTOR 0xFFFC
+#define IRQ_VECTOR 0xFFFE
 
 /* cycle counts for interrupts */
-#define  INT_CYCLES     7
-#define  RESET_CYCLES   6
+#define INT_CYCLES 7
+#define RESET_CYCLES 6
 
-#define  NMI_MASK       0x01
-#define  IRQ_MASK       0x02
+#define NMI_MASK 0x01
+#define IRQ_MASK 0x02
 
 /* Stack is located on 6502 page 1 */
-#define  STACK_OFFSET   0x0100
+#define STACK_OFFSET 0x0100
 
 typedef struct
 {
-   uint32 min_range, max_range;
-   uint8 (*read_func)(uint32 address);
+    uint32 min_range, max_range;
+    uint8 (*read_func)(uint32 address);
 } nes6502_memread;
 
 typedef struct
 {
-   uint32 min_range, max_range;
-   void (*write_func)(uint32 address, uint8 value);
+    uint32 min_range, max_range;
+    void (*write_func)(uint32 address, uint8 value);
 } nes6502_memwrite;
 
 typedef struct
 {
-   uint8 * mem_page[NES6502_NUMBANKS];  /* memory page pointers */
+    uint8* mem_page[NES6502_NUMBANKS]; /* memory page pointers */
 #ifdef NES6502_MEM_ACCESS_CTRL
-  uint8 * acc_mem_page[NES6502_NUMBANKS]; /* memory access page pointer */
+    uint8* acc_mem_page[NES6502_NUMBANKS]; /* memory access page pointer */
 #endif
-   nes6502_memread *read_handler;
-   nes6502_memwrite *write_handler;
-   int dma_cycles;
-   uint32 pc_reg;
-   uint8 a_reg, p_reg, x_reg, y_reg, s_reg;
-   uint8 int_pending;
+    nes6502_memread* read_handler;
+    nes6502_memwrite* write_handler;
+    int dma_cycles;
+    uint32 pc_reg;
+    uint8 a_reg, p_reg, x_reg, y_reg, s_reg;
+    uint8 int_pending;
 } nes6502_context;
 
 #ifdef __cplusplus
@@ -119,14 +119,14 @@ extern uint32 nes6502_getcycles(boolean reset_flag);
 extern void nes6502_setdma(int cycles);
 
 #ifdef NES6502_MEM_ACCESS_CTRL
-extern void nes6502_chk_mem_access(uint8 * access, int flags);
+extern void nes6502_chk_mem_access(uint8* access, int flags);
 #else
-#define nes6502_chk_mem_access(access,flags)
+#define nes6502_chk_mem_access(access, flags)
 #endif
 
 /* Context get/set */
-extern void nes6502_setcontext(nes6502_context *cpu);
-extern void nes6502_getcontext(nes6502_context *cpu);
+extern void nes6502_setcontext(nes6502_context* cpu);
+extern void nes6502_getcontext(nes6502_context* cpu);
 
 #ifdef __cplusplus
 }
