@@ -603,24 +603,9 @@
    SBC(cycles, NO_READ); \
 }
 
-#ifdef NES6502_TESTOPS
-#define JAM() \
-{ \
-   cpu_Jam(); \
-}
-#elif defined(NSF_PLAYER)
 #define JAM() \
 { \
 }
-#else
-#define JAM() \
-{ \
-   char jambuf[20]; \
-   sprintf(jambuf, "JAM: PC=$%04X", PC); \
-   ASSERT_MSG(jambuf); \
-   ADD_CYCLES(2); \
-}
-#endif /* NES6502_TESTOPS */
 
 #define JMP_INDIRECT() \
 { \

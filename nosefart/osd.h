@@ -59,31 +59,6 @@ extern int osd_startsound(void (*playfunc)(void *buffer, int size));
 extern int osd_getsoundbps(void);
 extern int osd_getsamplerate(void);
 
-
-#ifndef NSF_PLAYER
-#include "rgb.h"
-#include "bitmap.h"
-
-extern bitmap_t *osd_getvidbuf(void);
-typedef void (*blitproc_t)(bitmap_t *bmp, int x_pos, int y_pos, int width, int height);
-extern blitproc_t osd_blit;
-extern void osd_copytoscreen(void);
-
-extern void osd_showusage(char *filename);
-extern void osd_fullname(char *fullname, const char *shortname);
-extern char *osd_newextension(char *string, char *ext);
-
-extern void osd_setpalette(rgb_t *pal);
-extern void osd_restorepalette(void);
-
-extern void osd_getinput(void);
-extern int osd_gethostinput(void);
-extern void osd_getmouse(int *x, int *y, int *button);
-
-extern int osd_init(void);
-extern void osd_shutdown(void);
-#endif /* !NSF_PLAYER */
-
 #endif /* _OSD_H_ */
 
 /*

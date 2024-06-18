@@ -36,18 +36,9 @@
 /*#define  NES6502_DECIMAL*/
 
 /* number of bank pointers the CPU emulation core handles */
-#ifdef NSF_PLAYER
 #define  NES6502_4KBANKS
-#endif
-
-#ifdef NES6502_4KBANKS
 #define  NES6502_NUMBANKS  16
 #define  NES6502_BANKSHIFT 12
-#else
-#define  NES6502_NUMBANKS  8
-#define  NES6502_BANKSHIFT 13
-#endif
-
 #define  NES6502_BANKMASK  ((0x10000 / NES6502_NUMBANKS) - 1)
 
 /* Add memory access control flags. This is a ram shadow memory that holds

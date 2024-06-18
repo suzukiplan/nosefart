@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
     // play track 0
     nsf_playtrack(nsf, 2, 44100, 16, false);
 
-    nsf_setfilter(nsf, NSF_FILTER_NONE);
+    nsf_setfilter(nsf, NSF_FILTER_LOWPASS);
 
     // set channel
     for (int i = 0; i < 6; i++) {

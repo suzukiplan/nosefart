@@ -27,16 +27,7 @@
 #include "types.h"
 #include "nes_apu.h"
 #include "nes6502.h"
-
-#ifdef NSF_PLAYER
 #include "nsf.h"
-#else
-#include "nes.h"
-#include "nes_ppu.h"
-#include "nes_mmc.h"
-#include "nesinput.h"
-#endif /* !NSF_PLAYER */
-
 
 #define  APU_OVERSAMPLE
 #define  APU_VOLUME_DECAY(x)  ((x) -= ((x) >> 7))
@@ -893,16 +884,6 @@ uint8 apu_read(uint32 address)
 
       break;
 
-#ifndef NSF_PLAYER
-   case APU_JOY0:
-      value = input_get(INP_JOYPAD0);
-      break;
-
-   case APU_JOY1:
-      value = input_get(INP_ZAPPER | INP_JOYPAD1 /*| INP_ARKANOID*/ /*| INP_POWERPAD*/);
-      break;
-#endif /* !NSF_PLAYER */
-
    default:
       value = (address >> 8); /* heavy capacitance on data bus */
       break;
@@ -914,51 +895,26 @@ uint8 apu_read(uint32 address)
 
 void apu_write(uint32 address, uint8 value)
 {
-#ifndef NSF_PLAYER
-   static uint8 last_write;
-#endif /* !NSF_PLAYER */
    apudata_t d;
 
-   switch (address)
-   {
-   case 0x4015:
-      /* bodge for timestamp queue */
-      apu->dmc.enabled = (value & 0x10) ? TRUE : FALSE;
+   switch (address) {
+      case 0x4015:
+         /* bodge for timestamp queue */
+         apu->dmc.enabled = (value & 0x10) ? TRUE : FALSE;
 
-   case 0x4000: case 0x4001: case 0x4002: case 0x4003:
-   case 0x4004: case 0x4005: case 0x4006: case 0x4007:
-   case 0x4008: case 0x4009: case 0x400A: case 0x400B:
-   case 0x400C: case 0x400D: case 0x400E: case 0x400F:
-   case 0x4010: case 0x4011: case 0x4012: case 0x4013:
-      d.timestamp = nes6502_getcycles(FALSE);
-      d.address = address;
-      d.value = value;
-      apu_enqueue(&d);
-      break;
+      case 0x4000: case 0x4001: case 0x4002: case 0x4003:
+      case 0x4004: case 0x4005: case 0x4006: case 0x4007:
+      case 0x4008: case 0x4009: case 0x400A: case 0x400B:
+      case 0x400C: case 0x400D: case 0x400E: case 0x400F:
+      case 0x4010: case 0x4011: case 0x4012: case 0x4013:
+         d.timestamp = nes6502_getcycles(FALSE);
+         d.address = address;
+         d.value = value;
+         apu_enqueue(&d);
+         break;
 
-#ifndef NSF_PLAYER
-   case APU_OAMDMA:
-      ppu_oamdma(address, value);
-      break;
-
-   case APU_JOY0:
-      /* VS system VROM switching */
-      mmc_vsvrom(value & 4);
-
-      /* see if we need to strobe them joypads */
-      value &= 1;
-      if ((0 == value) && last_write)
-         input_strobe();
-      last_write = value;
-      break;
-
-   case APU_JOY1: /* Some kind of IRQ control business */
-      break;
-
-#endif /* !NSF_PLAYER */
-
-   default:
-      break;
+      default:
+         break;
    }
 }
 
@@ -1072,16 +1028,11 @@ void apu_reset(void)
    apu->q_tail = 0;
 
    /* use to avoid bugs =) */
-   for (address = 0x4000; address <= 0x4013; address++)
+   for (address = 0x4000; address <= 0x4013; address++) {
       apu_regwrite(address, 0);
-
-#ifdef NSF_PLAYER
+   }
    apu_regwrite(0x400C, 0x10); /* silence noise channel on NSF start */
    apu_regwrite(0x4015, 0x0F);
-#else
-   apu_regwrite(0x4015, 0);
-#endif /* NSF_PLAYER */
-
    if (apu->ext)
       apu->ext->reset();
 }
