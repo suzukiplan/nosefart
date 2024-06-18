@@ -35,6 +35,8 @@ rect[1] = 3F 08 9F 00 rect[1] = 3F 08 DF 01
 
 恐らく、256以下の周波数を設定した時にクリアされるべき reg3 が何故かクリアされない挙動になることで音痴になっているかもしれない。
 
+----
+
 FamiStudio のエクスポート機能の問題かもしれないので issue で確認中。
 
 https://github.com/BleuBleu/FamiStudio/issues/325
@@ -44,6 +46,13 @@ FamiStudio の作者さんからの情報によると、音程の変化にSweep�
 音程周波数の問題に着眼していてSweepが適切に実装されているかは確認していなかったのでnosefartのsweepが適切に実装されているか解析してみることにする。
 
 あとはもうちょっと動作実績のある Linux の NSF 再生機能があるエミュレータについても確認してみる。
+
+-----
+
+[puNES](https://github.com/punesemu/puNES) で検証したところ正常な音程で再生されることを確認した。
+
+puNES コアを利用した形への検証を進める。
+
 
 ## How to Build
 
