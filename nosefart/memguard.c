@@ -34,7 +34,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "memguard.h"
-#include "log.h"
 
 
 /* Maximum number of allocated blocks at any one time */

@@ -25,7 +25,6 @@
 
 #include <string.h>
 #include "types.h"
-#include "log.h"
 #include "nes_apu.h"
 #include "nes6502.h"
 
@@ -128,7 +127,6 @@ static int apu_enqueue(apudata_t *d)
    apu->q_head = (apu->q_head + 1) & APUQUEUE_MASK;
 
    if (APU_QEMPTY()) {
-      log_printf("apu: queue overflow\n");      
       SET_APU_ERROR(apu,"queue overflow");
       return -1;
    }
@@ -142,7 +140,6 @@ static apudata_t *apu_dequeue(void)
    ASSERT(apu);
 
    if (APU_QEMPTY()) {
-     log_printf("apu: queue empty\n");
      SET_APU_ERROR(apu,"queue empty");
      /* $$$ ben : should return 0 ??? */
    }

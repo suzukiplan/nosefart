@@ -28,7 +28,6 @@
 #include <string.h>
 #include "types.h"
 #include "nsf.h"
-#include "log.h"
 #include "nes6502.h"
 #include "nes_apu.h"
 #include "vrcvisnd.h"
@@ -700,15 +699,11 @@ nsf_t * nsf_load_extended(struct nsf_loader_t * loader)
 
   /* Read magic */
   if (loader->read(loader, id, 5)) {
-    log_printf("nsf : [%s] error reading magic number\n",
-	       loader->fname(loader));
     goto error;
   }
 
   /* Check magic */
   if (memcmp(id, NSF_MAGIC, 5)) {
-    log_printf("nsf : [%s] is not an NSF format file\n",
-	       loader->fname(loader));
     goto error;
   }
 
@@ -718,8 +713,6 @@ nsf_t * nsf_load_extended(struct nsf_loader_t * loader)
   temp_nsf = malloc(sizeof(nsf_t));
   
   if (NULL == temp_nsf) {
-    log_printf("nsf : [%s] error allocating nsf header\n",
-	       loader->fname(loader));
     goto error;
   }
   /* $$$ ben : safety net */
@@ -729,8 +722,6 @@ nsf_t * nsf_load_extended(struct nsf_loader_t * loader)
 
   /* Read header (without MAGIC) */
   if (loader->read(loader, (int8 *)temp_nsf+5, NSF_HEADER_SIZE - 5)) {
-    log_printf("nsf : [%s] error reading nsf header\n",
-	       loader->fname(loader));
     goto error;
   }
 
@@ -762,8 +753,6 @@ nsf_t * nsf_load_extended(struct nsf_loader_t * loader)
   }
 
   if (temp_nsf->length <= 0) {
-    log_printf("nsf : [%s] not an NSF format file (missing data)\n",
-	       loader->fname(loader));
     goto error;
   }
 
@@ -777,15 +766,11 @@ nsf_t * nsf_load_extended(struct nsf_loader_t * loader)
    temp_nsf->data = malloc(len);
   }
   if (NULL == temp_nsf->data) {
-    log_printf("nsf : [%s] error allocating nsf data\n",
-	       loader->fname(loader));
     goto error;
   }
 
   /* Read data */
   if (loader->read(loader, temp_nsf->data, temp_nsf->length)) {
-    log_printf("nsf : [%s] error reading NSF data\n",
-	       loader->fname(loader));
     goto error;
   }
 
@@ -804,8 +789,6 @@ nsf_t * nsf_load_extended(struct nsf_loader_t * loader)
       + (nsf_file_ext.size[3] << 24);
 
     if (size < sizeof(nsf_file_ext)) {
-      log_printf("nsf : [%s] corrupt extension size (%d)\n",
-		 loader->fname(loader), size);
       /* Not a fatal error here. Just skip extension loading. */
       break;
     }
@@ -826,16 +809,12 @@ nsf_t * nsf_load_extended(struct nsf_loader_t * loader)
       ++songs;
 
       if (loader->read(loader, tmp_time, size)) {
-	log_printf("nsf : [%s] missing extension data\n",
-		   loader->fname(loader));
 	/* Not a fatal error here. Just skip extension loading. */
 	break;
       }
       /* Alloc song_frames for songs (not tsongs). */
       temp_nsf->song_frames = malloc(sizeof(*temp_nsf->song_frames) * songs);
       if (!temp_nsf->song_frames) {
-	log_printf("nsf : [%s] extension alloc failed\n",
-		   loader->fname(loader));
 	/* Not a fatal error here. Just skip extension loading. */
 	break;
       }
@@ -857,8 +836,6 @@ nsf_t * nsf_load_extended(struct nsf_loader_t * loader)
 	temp_nsf->song_frames[i] = 0;
       }
     } else if (loader->skip(loader, size)) {
-	log_printf("nsf : [%s] extension skip failed\n",
-		   loader->fname(loader));
 	/* Not a fatal error here. Just skip extension loading. */
 	break;
     }
@@ -874,7 +851,6 @@ nsf_t * nsf_load_extended(struct nsf_loader_t * loader)
    temp_nsf->apu = NULL; /* just make sure */
 
    if (nsf_cpuinit(temp_nsf)) {
-     log_printf("nsf : error cpu init\n");
      goto error;
    }
    return temp_nsf;

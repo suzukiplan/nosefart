@@ -10,11 +10,11 @@ static void audioCallback(void* userdata, Uint8* stream, int len)
 {
     nsf_t* nsf = (nsf_t*)userdata;
     nsf_frame(nsf);
-    printf("rect[1] = %02X %02X %02X %02X rect[1] = %02X %02X %02X %02X    \r",
+    printf("rect1 = %02X %02X %02X %02X, rect2 = %02X %02X %02X %02X    \r",
         nsf->apu->rectangle[0].regs[0], nsf->apu->rectangle[0].regs[1], nsf->apu->rectangle[0].regs[2], nsf->apu->rectangle[0].regs[3],
         nsf->apu->rectangle[1].regs[0], nsf->apu->rectangle[1].regs[1], nsf->apu->rectangle[1].regs[2], nsf->apu->rectangle[1].regs[3]
     );
-    nsf->process(stream, len / 2);
+    apu_process(stream, len / 2);
 }
 
 int main(int argc, char* argv[])
@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
     }
 
     // play track 0
-    nsf_playtrack(nsf, 0, 44100, 16, false);
+    nsf_playtrack(nsf, 2, 44100, 16, false);
 
     nsf_setfilter(nsf, NSF_FILTER_NONE);
 

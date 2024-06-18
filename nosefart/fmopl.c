@@ -24,7 +24,6 @@
 
 /* MPC - hacks */
 #include "types.h"
-#include "log.h"
 
 #ifndef PI
 #define PI 3.14159265358979323846
@@ -574,8 +573,11 @@ static void init_timetables( FM_OPL *OPL , int ARRATE , int DRRATE )
 	double rate;
 
 	/* make attack rate & decay rate tables */
-	for (i = 0;i < 4;i++) OPL->AR_TABLE[i] = OPL->DR_TABLE[i] = 0;
-	for (i = 4;i <= 60;i++){
+	for (i = 0;i < 4;i++) {
+		OPL->AR_TABLE[i] = 0;
+		OPL->DR_TABLE[i] = 0;
+	}
+	for (i = 4;i <= 60;i++) {
 		rate  = OPL->freqbase;						/* frequency rate */
 		if( i < 60 ) rate *= 1.0+(i&3)*0.25;		/* b0-1 : x1 , x1.25 , x1.5 , x1.75 */
 		rate *= 1<<((i>>2)-1);						/* b2-5 : shift bit */
@@ -1287,10 +1289,9 @@ unsigned char OPLRead(FM_OPL *OPL,int a)
 	case 0x05: /* KeyBoard IN */
 		if(OPL->type&OPL_TYPE_KEYBOARD)
 		{
-			if(OPL->keyboardhandler_r)
+			if(OPL->keyboardhandler_r) {
 				return OPL->keyboardhandler_r(OPL->keyboard_param);
-			else
-				LOG(LOG_WAR,("OPL:read unmapped KEYBOARD port\n"));
+			}
 		}
 		return 0;
 #if 0
@@ -1300,10 +1301,9 @@ unsigned char OPLRead(FM_OPL *OPL,int a)
 	case 0x19: /* I/O DATA    */
 		if(OPL->type&OPL_TYPE_IO)
 		{
-			if(OPL->porthandler_r)
+			if(OPL->porthandler_r) {
 				return OPL->porthandler_r(OPL->port_param);
-			else
-				LOG(LOG_WAR,("OPL:read unmapped I/O port\n"));
+			}
 		}
 		return 0;
 	case 0x1a: /* PCM-DATA    */
