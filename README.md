@@ -6,7 +6,7 @@
 - オリジナルのソースコードは [nosefart](./nosefart/) ディレクトリ以下に格納されています。
 - [nsfplay.cpp](./nsfplay.cpp) は SDL2 を用いて nosefart で NSF ファイルを再生する実装です
 
-## WIP Status
+## WIP Status (forever)
 
 とりあえず再生できたものの矩形波チャネル2が途中からおかしな感じになる。
 
@@ -53,6 +53,11 @@ FamiStudio の作者さんからの情報によると、音程の変化にSweep�
 
 puNES コアを利用した形への検証を進める。
 
+-----
+
+puNES コアから nsf 再生機能を抽出するのがかなり面倒くさそうだったので、NSFPlay (Windows 専用) を Linux へ移植する方向性で対処
+
+https://github.com/suzukiplan/nsfplay-linux/
 
 ## How to Build
 
